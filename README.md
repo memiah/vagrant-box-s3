@@ -1,5 +1,7 @@
 # Vagrant Box S3
 
+[![Gem Version](https://badge.fury.io/rb/vagrant-box-s3.svg)](https://badge.fury.io/rb/vagrant-box-s3)
+
 Use Vagrant boxes stored in Amazon S3 private buckets.
 
 ### Requirements
