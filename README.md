@@ -14,11 +14,20 @@ override the `execute_curl` method to replace S3 box URLs with pre-signed S3 URL
 
 ## Installation
 
-    vagrant plugin install ../vagrant-box-s3/pkg/vagrant-box-s3-0.1.2.gem
+Via Vagrantfile, using [config.vagrant.plugins](https://developer.hashicorp.com/vagrant/docs/vagrantfile/vagrant_settings#config-vagrant-plugins): 
+
+    Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+      config.vagrant.plugins = ['vagrant-box-s3', 'other-plugin']
+      ...
+    end
+
+Or via plugin install command:
+
+    vagrant plugin install vagrant-box-s3
 
 ## Usage
 
-The plugin with automatically sign requests to AWS S3 URLs with your AWS credentials, allowing you to store private
+The plugin will automatically sign requests to AWS S3 URLs with your AWS credentials, allowing storage of private
 boxes on S3 with your own bucket policies in place.
 
 ## Configuration
