@@ -14,6 +14,11 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/memiah/vagrant-box-s3"
   spec.license       = "MIT"
 
+  spec.metadata = {
+    "source_code_uri" => "https://github.com/memiah/vagrant-box-s3",
+    "bug_tracker_uri" => "https://github.com/memiah/vagrant-box-s3/issues"
+  }
+
   spec.required_rubygems_version = '>= 3.0.0'
 
   spec.files = Dir['lib/**/*', 'README.md', 'LICENSE.txt']
