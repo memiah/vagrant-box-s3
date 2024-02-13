@@ -7,12 +7,14 @@ Gem::Specification.new do |spec|
   spec.name          = "vagrant-box-s3"
   spec.version       = VagrantPlugins::BoxS3::VERSION
   spec.authors       = ["Steve Whiteley"]
-  spec.email         = ["steve@memiah.co.uk"]
+  spec.email         = ["opensource@memiah.co.uk"]
 
   spec.summary       = %q{Amazon AWS S3 Auth.}
   spec.description   = %q{Private, versioned Vagrant boxes hosted on Amazon S3.}
   spec.homepage      = "https://github.com/memiah/vagrant-box-s3"
   spec.license       = "MIT"
+
+  spec.required_ruby_version = '>= 2.7.0'
 
   spec.files = Dir['lib/**/*', 'README.md', 'LICENSE.txt']
   spec.require_path = 'lib'
