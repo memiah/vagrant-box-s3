@@ -1,4 +1,4 @@
-# Vagrant AWS Auth
+# Vagrant Box S3
 
 Use Vagrant boxes stored in Amazon S3 private buckets.
 
