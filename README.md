@@ -100,13 +100,18 @@ A specific version of ruby can be installed on macOS via rbenv:
 
     ruby -v
 
+
+### Builds
+
 If bundled packages / dependencies have changed, run bundle install:
 
     bundle install --path vendor/bundle
 
-To build the plugin, use `rake build`, this will create a file with the current version number, e.g. `pkg/vagrant-box-s3-0.1.2.gem`.
-
 Update the current version in `lib/vagrant-box-s3/version.rb`.
+
+### Dev build and test
+
+To build the plugin, use `rake build`, this will create a file with the current version number, e.g. `pkg/vagrant-box-s3-0.1.2.gem`.
 
 Testing the plugin requires installing into vagrant from the build:
 
@@ -114,9 +119,25 @@ Testing the plugin requires installing into vagrant from the build:
 
 Then running a command that will trigger box URL related actions, such as `vagrant up`, `vagrant box update` etc. with the `--debug` flag.
 
+### Releases
+
+To release a new version to [RubyGems.org](https://rubygems.org/gems/vagrant-box-s3), you must be authenticated.
+
+If you have not previously authenticated, sign in:
+
+    gem signin
+
+This will store and use credentials in `~/.gem/credentials`.
+
+Ensure the new version number is correctly set in `lib/vagrant-box-s3/version.rb`.
+
+Then you can build and push the release:
+
+    rake release
+
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/vagrant-box-s3. 
+Bug reports and pull requests are welcome on GitHub at https://github.com/memiah/vagrant-box-s3. 
 This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
