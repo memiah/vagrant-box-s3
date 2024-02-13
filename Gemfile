@@ -1,6 +1,11 @@
 source "https://rubygems.org"
 
-git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
-
-# Specify your gem's dependencies in vagrant-box-s3.gemspec
 gemspec
+
+group :development do
+  gem "vagrant", git: "https://github.com/hashicorp/vagrant.git"
+end
+
+group :plugins do
+  gem 'aws-sdk-s3', '~> 1.143.0'
+end
