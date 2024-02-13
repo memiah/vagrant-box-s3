@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/memiah/vagrant-box-s3"
   spec.license       = "MIT"
 
-  spec.required_ruby_version = '>= 2.7.0'
+  spec.required_rubygems_version = '>= 3.0.0'
 
   spec.files = Dir['lib/**/*', 'README.md', 'LICENSE.txt']
   spec.require_path = 'lib'

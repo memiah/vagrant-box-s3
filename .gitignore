@@ -1,10 +1,22 @@
-.idea
-/.bundle/
+# OS-specific
+.DS_Store
+
+# Bundler/Rubygems
+*.gem
+.bundle
+pkg/*
+/Gemfile.lock
+/vendor
 /.yardoc
 /_yardoc/
-/coverage/
-/doc/
-/pkg/
-/spec/reports/
 /tmp/
-vendor
+
+# IDE
+.idea/*
+*.iml
+
+# Ruby Managers
+.rbenv
+.ruby-gemset
+.ruby-version
+.rvmrc
