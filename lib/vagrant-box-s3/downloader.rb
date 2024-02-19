@@ -20,10 +20,14 @@ module Vagrant
         # Call original execute_curl (aliased).
         execute_curl_without_aws_auth(options, subprocess_options, &data_proc)
 
+      rescue Aws::Errors::MissingCredentialsError, Aws::Sigv4::Errors::MissingCredentialsError => e
+        message = "Missing AWS credentials: #{e.message}"
+        @logger.error(message) if defined?(@logger)
+        raise Errors::DownloaderError, message: message
       rescue Aws::S3::Errors::Forbidden => e
         message = "403 Forbidden: #{e.message}"
         raise Errors::DownloaderError, message: message
-      rescue Seahorse::Client::NetworkingError => e
+      rescue => e
         raise Errors::DownloaderError, message: e
       end
 

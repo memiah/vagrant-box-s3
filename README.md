@@ -40,14 +40,14 @@ You can also use your credentials file to create a profile. Select the appropria
 
 #### ~/.aws/credentials
 
-    [vagrant-s3auth]
+    [vagrant-box-s3]
     aws_access_key_id = AKIA...
     aws_secret_access_key = ...
 
 #### Vagrantfile
 
     ENV.delete_if { |name| name.start_with?('AWS_') }  # Filter out rogue env vars.
-    ENV['AWS_PROFILE'] = 'vagrant-s3auth'
+    ENV['AWS_PROFILE'] = 'vagrant-box-s3'
 
     Vagrant.configure("2") { |config| ... }
 
@@ -60,10 +60,11 @@ You can use any valid HTTP(S) URL for your box URL:
 Specify the bucket name in the path of the URL. AWS has deprecated path-style URLs, but they might still be seen or used in legacy systems.
 
 - Format: https://s3.Region.amazonaws.com/bucket-name/key-name
-  Example: https://s3.eu-west-1.amazonaws.com/mybucket/mybox.box
+- Example: https://s3.eu-west-1.amazonaws.com/mybucket/mybox.box
+
 
 - Format: https://s3-Region.amazonaws.com/bucket-name/keyname
-  Example: https://s3-eu-west-1.amazonaws.com/bucket-name/mybox.box
+- Example: https://s3-eu-west-1.amazonaws.com/bucket-name/mybox.box
 
 #### Virtual-Hosted-Style URLs
 Virtual-hosted-style URLs use the bucket name as a subdomain. This is the recommended and most commonly used format.
@@ -123,6 +124,10 @@ Update the current version in `lib/vagrant-box-s3/version.rb`.
 ### Dev build and test
 
 To build the plugin, use `rake build`, this will create a file with the current version number, e.g. `pkg/vagrant-box-s3-0.1.2.gem`.
+
+Remove the old version:
+
+    vagrant plugin uninstall vagrant-box-s3
 
 Testing the plugin requires installing into vagrant from the build:
 
