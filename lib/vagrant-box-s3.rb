@@ -11,7 +11,7 @@ module VagrantPlugins
       end
 
       action_hook(:box_s3_url, :authenticate_box_url) do |hook|
-        hook.prepend(VagrantPlugins::BoxS3::Urls)
+        hook.prepend(Urls)
       end
 
     end
