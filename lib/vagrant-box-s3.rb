@@ -10,7 +10,7 @@ module VagrantPlugins
         require_relative 'vagrant-box-s3/downloader'
       end
 
-      action_hook(:box_s3_url, :authenticate_box_url) do |hook|
+      action_hook(:vagrant_box_s3_url, :authenticate_box_url) do |hook|
         hook.prepend(Urls)
       end
 
