@@ -11,8 +11,9 @@ Use Vagrant boxes stored in Amazon S3 private buckets.
 
 ## Features
 
-This plugin works by monkey patching `Vagrant::Util::Downloader`, extending the core Downloader class in Vagrant to
-override the `execute_curl` method to replace S3 box URLs with pre-signed S3 URLs.
+This plugin works using the `authenticate_box_url` hook to replace S3 URLs with presigned URLs and monkey 
+patching `Vagrant::Util::Downloader`, extending the core Downloader class in Vagrant to override the `head` method 
+used when fetching box metadata URLs from S3.
 
 ## Installation
 
@@ -123,15 +124,15 @@ Update the current version in `lib/vagrant-box-s3/version.rb`.
 
 ### Dev build and test
 
-To build the plugin, use `rake build`, this will create a file with the current version number, e.g. `pkg/vagrant-box-s3-0.1.2.gem`.
+To build the plugin, use `rake build`, this will create a file with the current version number, e.g. `pkg/vagrant-box-s3-{VERSION}.gem`.
 
 Remove the old version:
 
-    vagrant plugin uninstall vagrant-box-s3
+    vagrant plugin uninstall vagrant-box-s3 --local
 
 Testing the plugin requires installing into vagrant from the build:
 
-    vagrant plugin install ../vagrant-box-s3/pkg/vagrant-box-s3-0.1.2.gem
+    vagrant plugin install ../vagrant-box-s3/pkg/vagrant-box-s3-{VERSION}.gem
 
 Then running a command that will trigger box URL related actions, such as `vagrant up`, `vagrant box update` etc. with the `--debug` flag.
 

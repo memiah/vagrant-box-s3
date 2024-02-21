@@ -4,46 +4,23 @@ module Vagrant
   module Util
     class Downloader
 
-      def aws_auth_download(options, subprocess_options, &data_proc)
-        # Get URL from options, which is the last option in the list.
-        url = options.last
+      alias_method :original_head, :head
 
-        # Determine method from curl command -I flag existence.
-        method = options.any? { |o| o == '-I' } ? :head_object : :get_object
+      def head
+        if VagrantPlugins::BoxS3::Utils.is_s3_manifest(@source)
+          options, subprocess_options = self.options
+          options.unshift("-i")
+          options << @source
 
-        # Generate pre-signed URL from S3 URL.
-        presigned_url = VagrantPlugins::BoxS3::Utils.presign_url(method, url, @logger)
+          @logger.info("HEAD (Override): #{@source}")
+          result = execute_curl(options, subprocess_options)
 
-        # Update URL in options.
-        url.replace(presigned_url.to_s)
-
-        # Call original execute_curl (aliased).
-        execute_curl_without_aws_auth(options, subprocess_options, &data_proc)
-
-      rescue Aws::Errors::MissingCredentialsError, Aws::Sigv4::Errors::MissingCredentialsError => e
-        message = "Missing AWS credentials: #{e.message}"
-        @logger.error(message) if defined?(@logger)
-        raise Errors::DownloaderError, message: message
-      rescue Aws::S3::Errors::Forbidden => e
-        message = "403 Forbidden: #{e.message}"
-        raise Errors::DownloaderError, message: message
-      rescue => e
-        raise Errors::DownloaderError, message: e
-      end
-
-      def execute_curl_with_aws_auth(options, subprocess_options, &data_proc)
-        options = options.dup
-        url = options.find { |o| o =~ /^http/ }
-
-        if url && url.include?('amazonaws.com')
-          aws_auth_download(options, subprocess_options, &data_proc)
+          headers, _body = result.stdout.split("\r\n\r\n", 2)
+          headers
         else
-          execute_curl_without_aws_auth(options, subprocess_options, &data_proc)
+          original_head
         end
       end
-
-      alias execute_curl_without_aws_auth execute_curl
-      alias execute_curl execute_curl_with_aws_auth
 
     end
   end
