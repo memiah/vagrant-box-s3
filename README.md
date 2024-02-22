@@ -56,22 +56,22 @@ You can also use your credentials file to create a profile. Select the appropria
 
 You can use any valid HTTP(S) URL for your box URL:
 
+#### Virtual-Hosted-Style URLs
+
+Virtual-hosted-style URLs use the bucket name as a subdomain. This is the recommended and most commonly used format.
+
+| Format                                       | Example                                                    |
+|----------------------------------------------|------------------------------------------------------------|
+| `https://BUCKET.s3.REGION.amazonaws.com/KEY` | `https://mybucket.s3.eu-west-1.amazonaws.com/mybox.box`    |
+
 #### Path-Style URLs
 
 Specify the bucket name in the path of the URL. AWS has deprecated path-style URLs, but they might still be seen or used in legacy systems.
 
-- Format: https://s3.Region.amazonaws.com/bucket-name/key-name
-- Example: https://s3.eu-west-1.amazonaws.com/mybucket/mybox.box
-
-
-- Format: https://s3-Region.amazonaws.com/bucket-name/keyname
-- Example: https://s3-eu-west-1.amazonaws.com/bucket-name/mybox.box
-
-#### Virtual-Hosted-Style URLs
-Virtual-hosted-style URLs use the bucket name as a subdomain. This is the recommended and most commonly used format.
-
-- Format: https://bucket-name.s3.Region.amazonaws.com/key-name
-- Example: https://mybucket.s3.eu-west-1.amazonaws.com/mybox.box
+| Format                                       | Example                                                    |
+|----------------------------------------------|------------------------------------------------------------|
+| `https://s3.REGION.amazonaws.com/BUCKET/KEY` | `https://s3.eu-west-1.amazonaws.com/mybucket/mybox.box`    |
+| `https://s3-REGION.amazonaws.com/BUCKET/KEY` | `https://s3-eu-west-1.amazonaws.com/bucket-name/mybox.box` |
 
 ### IAM configuration
 
