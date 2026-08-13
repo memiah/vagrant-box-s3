@@ -48,10 +48,19 @@ module VagrantPlugins
           @logger.debug("Key: #{key}")
           @logger.debug("Profile: #{profile}")
 
-          client = Aws::S3::Client.new(
+          client_options = {
             profile: profile,
             region: region
-          )
+          }
+          
+          endpoint = ENV['AWS_ENDPOINT_URL']
+          
+          unless endpoint.nil? || endpoint.empty?
+            client_options[:endpoint] = endpoint
+            client_options[:force_path_style] = true
+          end
+          
+          client = Aws::S3::Client.new(**client_options)
           presigner = Aws::S3::Presigner.new(client: client)
 
           presigned_url = presigner.presigned_url(

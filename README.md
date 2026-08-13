@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/vagrant-box-s3.svg)](https://badge.fury.io/rb/vagrant-box-s3)
 
-Use Vagrant boxes stored in Amazon S3 private buckets.
+Use Vagrant boxes stored in private S3 buckets.
 
 ### Requirements
 
@@ -35,9 +35,11 @@ boxes on S3 with your own bucket policies in place.
 
 ## Configuration
 
-AWS credentials are read from the standard environment variables `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
+AWS credentials are read from the standard environment variables `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` and AWS_REGION.
 
 You can also use your credentials file to create a profile. Select the appropriate profile using the `AWS_PROFILE` environment variable. For example:
+
+If your S3 endpoint is different from Amazon, then put it as an environment variable AWS_ENDPOINT_URL - !! new feature of this fork !!
 
 #### ~/.aws/credentials
 
@@ -47,7 +49,6 @@ You can also use your credentials file to create a profile. Select the appropria
 
 #### Vagrantfile
 
-    ENV.delete_if { |name| name.start_with?('AWS_') }  # Filter out rogue env vars.
     ENV['AWS_PROFILE'] = 'vagrant-box-s3'
 
     Vagrant.configure("2") { |config| ... }
